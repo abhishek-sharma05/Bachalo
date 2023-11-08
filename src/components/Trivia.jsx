@@ -22,6 +22,7 @@ export default function Trivia({
   }, [letsPlay]);
 
   useEffect(() => {
+    console.log(data[0])
     setQuestion(data[questionNumber - 1]);
   }, [data, questionNumber]);
 

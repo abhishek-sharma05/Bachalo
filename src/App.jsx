@@ -34,17 +34,19 @@ function App() {
       ].reverse(),
     []
   );
-
+  useEffect(() => {
+    console.log('This is dara ', data.length)
+  }, [data])
   useEffect(() => {
     questionNumber > 1 &&
       setEarned(moneyPyramid.find((m) => m.id === questionNumber - 1).amount);
   }, [questionNumber, moneyPyramid]);
 
-  console.log("username: ", username);
-  console.log("timeOut: ", timeOut);
-  console.log("questionNumber: ", questionNumber);
-  console.log("earned: ", earned);
-  console.log("data: ", data);
+  // console.log("username: ", username);
+  // console.log("timeOut: ", timeOut);
+  // console.log("questionNumber: ", questionNumber);
+  // console.log("earned: ", earned);
+  // console.log("data: ", data);
 
   return (
     <div className="app">
@@ -66,12 +68,17 @@ function App() {
                   </div>
                 </div>
                 <div className="bottom">
-                  <Trivia
+                {data && (
+              <div>
+                <Trivia
                     data={data}
                     questionNumber={questionNumber}
                     setQuestionNumber={setQuestionNumber}
                     setTimeOut={setTimeOut}
                   />
+              </div>
+            )}
+                  
                 </div>
               </>
             )}
@@ -94,9 +101,13 @@ function App() {
             </ul>
           </div>
           <div>
-            {data.map((d) => (
-              <p key={d.id}>{d.text}</p>
-            ))}
+            {Array.isArray(data) && (
+              <div>
+                {data.map((d) => (
+                  <p key={d.id}>{d.text}</p>
+                ))}
+              </div>
+            )}
           </div>
         </>
       )}
